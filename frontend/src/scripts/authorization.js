@@ -31,7 +31,7 @@ export function completeAuth(){
     
     generateCodeChallenge(codeVerifier).then(challenge => {
       var state = generateKey(16);
-      var scope = 'user-read-private user-read-email';
+      var scope = 'playlist-read-private playlist-modify-public playlist-modify-private user-read-private user-read-email';
       localStorage.setItem('code_verifier', codeVerifier);
       args = new URLSearchParams({
           response_type: 'code',
