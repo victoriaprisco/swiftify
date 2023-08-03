@@ -1,5 +1,5 @@
 import {getToken} from '../scripts/authorization.js';
-
+import Playlist from './Playlist.js';
 async function getProfile (token) {
     const result = await fetch("https://api.spotify.com/v1/me", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
@@ -24,11 +24,17 @@ const playlists = await (async ()=>{
 })();
 
 const Dashboard = () => {
+    var returnValue = <>
+    {profile ? <h1>hey {profile.display_name}!</h1> :  <h1>no work</h1>} </>;
     console.log(playlists);
-    return(
-    <>
-        {profile ? <h1>hey {profile.display_name}!</h1> :  <h1>no work</h1>}
-    </>
+    if(playlists.items){
+        playlists.items.forEach((playlist)=>{
+        returnValue += playlist.name + `<br>`;
+    });
+    }
+    
+    return(returnValue
+    
     );
 }
 
