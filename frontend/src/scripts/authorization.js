@@ -1,3 +1,7 @@
+const env = {
+  SPOTIFY_SECRET: process.env.SPOTIFY_SECRET,
+  SPOTIFY_API_TOKEN: process.env.SPOTIFY_API_TOKEN
+};
 
 function generateKey(length){
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789abcdefghijklmnopqrstuvwxyz";
@@ -22,9 +26,8 @@ async function generateCodeChallenge(codeVerifier) {
   
     return base64encode(digest);
   }
-let args = "";
 export function completeAuth(){
-    const clientID = "f9056af9d3e0426a8f240b854ca03363";
+    const clientID = process.env.REACT_APP_SPOTIFY_API_TOKEN;
     // const redirectURI = 'https://victoriaprisco.github.io/swiftify/';
     const redirectURI = 'http://localhost:3000/'
     var codeVerifier = generateKey(128);
@@ -33,7 +36,7 @@ export function completeAuth(){
       var state = generateKey(16);
       var scope = 'playlist-read-private playlist-modify-public playlist-modify-private user-read-private user-read-email';
       localStorage.setItem('code_verifier', codeVerifier);
-      args = new URLSearchParams({
+      let args = new URLSearchParams({
           response_type: 'code',
           client_id: clientID,
           scope: scope,
@@ -44,15 +47,13 @@ export function completeAuth(){
       });
     window.location = 'https://accounts.spotify.com/authorize?' + args;
   });
-  localStorage.setItem("spotifyLoggedIn", true);
-  // return args;  
 }
 
 export async function getToken(code){
   const verifier = localStorage.getItem("code_verifier");
   const redirectURI = 'http://localhost:3000/'
   const params = new URLSearchParams();
-  params.append("client_id", "f9056af9d3e0426a8f240b854ca03363");
+  params.append("client_id", process.env.REACT_APP_SPOTIFY_API_TOKEN);
   params.append("grant_type", "authorization_code");
   params.append("code", code);
   params.append("redirect_uri", redirectURI);
