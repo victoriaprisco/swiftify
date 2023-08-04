@@ -1,8 +1,6 @@
 const Playlist = (props) => {
     return (
-        <>
-        {props.title}
-        </>
+        <li>{props.title}</li>
     )
 }
 export default Playlist;

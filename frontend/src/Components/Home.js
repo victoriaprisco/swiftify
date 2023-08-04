@@ -2,11 +2,12 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 
 
-const Home = () => {
+const Home = (props) => {
     // console.log(window.location.href);
+    
     return(
         <>
-        {window.location.href === "http://localhost:3000/" ?
+        {props.reload === true || window.location.href === 'http://localhost:3000/' ?
             <Login /> :
             <Dashboard />   
         }   

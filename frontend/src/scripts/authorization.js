@@ -44,6 +44,7 @@ export function completeAuth(){
       });
     window.location = 'https://accounts.spotify.com/authorize?' + args;
   });
+  localStorage.setItem("spotifyLoggedIn", true);
   // return args;  
 }
 
