@@ -1,8 +1,3 @@
-const env = {
-  SPOTIFY_SECRET: process.env.SPOTIFY_SECRET,
-  SPOTIFY_API_TOKEN: process.env.SPOTIFY_API_TOKEN
-};
-
 function generateKey(length){
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789abcdefghijklmnopqrstuvwxyz";
     var key = "";
