@@ -1,33 +1,28 @@
 import {useState} from 'react';
-async function getTracks (contents, token) {
-    const result = await fetch(contents, {
-        method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
-    return await result.json();
-}
+import Song from './Song.js';
+import {returnVal, fulfillPromise} from '../scripts/handleAPIRequests.js';
 
-async function fulfillPromise(contents, token){
-    try {
-        var tracks = await getTracks(contents, token);
-        createReturn(tracks);
-    }
-    catch (e) {
-        console.error(e);
-    }
-}
-var returnVal;
-const createReturn = (result) => {
-    console.log(returnVal);
-    returnVal = (result);
-}
 const Playlist = (props) => {
-    fulfillPromise(props.object.tracks.href, props.token.access_token);
+    
     const [show, setShow] = useState(false);
-
+    const getSongList = () => {
+        var songs = [];
+        console.log(returnVal);
+        if(returnVal){
+            returnVal.items.forEach((value)=>{
+                console.log(value);
+                songs.push(<Song songTitle = {value.track.name} />);
+            });
+        }
+        return songs;
+    }
     return (
         <>
-            <li>{props.object.name}</li>
-            <p onClick={() =>{setShow(true)}}>{show === true && console.log("!!!", returnVal)}</p>
+            <li onClick={() =>{
+                setShow(!show);
+                fulfillPromise(props.object.tracks.href);
+                }}>{props.object.name}</li>
+            <p>{show === true && returnVal && getSongList()}</p>
         </>
     )
 }
