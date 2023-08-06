@@ -7,7 +7,7 @@ const Home = (props) => {
         <>
         {props.reload === true || window.location.href === 'http://localhost:3000/' ?
             <Login /> :
-            <Dashboard />   
+            <Dashboard />
         }   
         </>
     );
