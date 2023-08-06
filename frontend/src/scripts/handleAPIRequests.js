@@ -48,7 +48,7 @@ export const playlists = await (async ()=>{
 })();
 
 
-async function getTracks (contents) {
+export  async function getTracks (contents) {
     console.log(token);
     const result = await fetch(contents, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
@@ -56,32 +56,14 @@ async function getTracks (contents) {
     return await result.json();
 }
 
-export async function fulfillPromise(contents){
-    try {
-        const tracks = await getTracks(contents)
-        createReturn(tracks);
-    }
-    catch (e) {
-        console.error(e);
-    }
-}
-export const formatJSON = () => {
-    var returnJSON = []
-    returnVal.items.forEach((value)=>{
+export function formatJSON(tracks){
+    var returnJSON = [];
+    tracks.items.forEach((value)=>{
         returnJSON.push({
-            "name": value.track.name,
-            "artist": value.track.artists[0].name,
-            "album":  value.track.album.name
-        });
+                "name": value.track.name,
+                "artist": value.track.artists[0].name,
+                "album":  value.track.album.name
+            });
     });
     return returnJSON;
-}
-export var returnVal;
-const createReturn = (result) => {
-    returnVal = result;
-}
-
-export function getReturnVal(contents){
-    fulfillPromise(contents);
-    return returnVal;
 }
