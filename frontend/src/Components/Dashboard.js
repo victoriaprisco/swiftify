@@ -11,9 +11,10 @@ const Dashboard = () => {
     playlists.forEach((playlistList)=>{
         if(playlistList){
             playlistList.forEach(async (playlist) => {
+                console.log(playlist);
                 const tracks = await getTracks(playlist.tracks.href);
-                const formattedTracks = formatJSON(playlist.id, tracks);
-                getSwiftTracks(formattedTracks);
+                const formattedTracks = formatJSON(playlist.owner, playlist.id, tracks);
+                getSwiftTracks(profile, formattedTracks);
                 resultsList.push(<Playlist key={playlist.id} object={playlist}/>);
             });
         }

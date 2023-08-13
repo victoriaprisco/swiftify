@@ -27,7 +27,6 @@ async function getPlaylists(token){
             });
             var json = await result.json();
             results.push(json.items);
-            console.log(results);
             offset = json.offset;
             total = json.total;
             next = json.next;
@@ -49,14 +48,13 @@ export const playlists = await (async ()=>{
 
 
 export  async function getTracks (contents) {
-    console.log(token);
     const result = await fetch(contents, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
     return await result.json();
 }
 
-export function formatJSON(playlistID, tracks){
+export function formatJSON(owner, playlistID, tracks){
     var returnJSON = [];
     var i = 0;
     tracks.items.forEach((value)=>{
@@ -66,7 +64,8 @@ export function formatJSON(playlistID, tracks){
                 "album":  value.track.album.name,
                 "uri": value.track.uri,
                 "playlistID": playlistID,
-                "position": i
+                "position": i,
+                "owner": owner.id
             });
         i++;
     });
@@ -81,42 +80,39 @@ export async function getSong(searchTerm){
 }
 function createBody(ids){
     // console.log(ids);
+    var i = 0;
     var idsToRemove = Array();
     ids.forEach((id)=>{
-        idsToRemove.push({
-            "uri": id.oldTrack.uri
-        });
-    });
+        // console.log("URI", id.oldTrack.uri.replace(/'/g, '"'));
+        var uri = id.oldTrack.uri.replace(/'/g, '"');
+        idsToRemove[i] = {"uri": uri}
+        i++;
+    }); 
     // console.log(idsToRemove);
     return idsToRemove;
 }
 export async function removeTracks(map){
     // buildBody(ids);
-    map.forEach(async (value, key)=>{
-        console.log(key, value);
+    map.forEach((value, key)=>{
         const playlistID = key;
         const idsToRemove = createBody(value);
-        console.log(playlistID, idsToRemove.toLocaleString());
-        const result = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks/`, {
-            method: "DELETE", 
-            body: {"tracks": idsToRemove} ,
-            headers: { Authorization: `Bearer ${token}` }
-            
-        });
-        result.json().then((res)=>{console.log(res)}).catch((e)=>{console.error(e)});
+        // console.log("FROM PLAYLIST", playlistID, "IDS", idsToRemove, "TOKEN", token, "SNAPSHOT", snapshot);
+        const test = {
+            body: {
+            "tracks": idsToRemove
+            }
+        };
+        console.log("TOKEN", token, "PLAYLIST", playlistID, "BODY", JSON.stringify(test));
+        console.log(JSON.stringify
+            (test));
+        fetch("https://api.spotify.com/v1/playlists/"+ playlistID + "/tracks", {
+            body: {
+                "tracks": idsToRemove
+                },
+            headers: {
+                Authorization: "Bearer "+token
+            },
+            method: "DELETE"          
+        }).catch((e)=>{console.error(e)});
     });
-    // mapKeys.forEach((key)=>{
-    //     console.log(key);
-    // })
-    // // https://api.spotify.com/v1/playlists/{playlist_id}/tracks
-    // const result = await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`, {
-    //     method: "GET", 
-    //     headers: { Authorization: `Bearer ${token}` },
-    //     body: {
-    //         "tracks": {
-    //             // 'uri': oldTrack.id
-    //         }
-    //     }
-    // });
-    // return await result.json();
 }

@@ -1,13 +1,11 @@
 import { getSong, removeTracks } from './handleAPIRequests';
-const TVs = ["Fearless", "Speak Now", "Speak Now (Deluxe Edition)", "Red"];
+const TVs = ["Fearless", "Fearless Platinum Edition", "Speak Now", "Speak Now (Deluxe Edition)", "Red", "Red (Deluxe Edition)"];
 
-export function getSwiftTracks(playlist){
+export function getSwiftTracks(profile, playlist){
     var stolenTracks = [];
     playlist.forEach((track)=>{
-        // console.log(track.artist);
-        if(track.artist === "Taylor Swift"){
+        if(track.owner === profile.id && track.artist === "Taylor Swift"){
             if(TVs.includes(track.album)){
-                // console.log("IMPOSTER ", track.name);
                 stolenTracks.push(track);
             }
         }
@@ -15,7 +13,6 @@ export function getSwiftTracks(playlist){
     if(stolenTracks.length != 0){
         removeStolens(stolenTracks);
     }
-    // console.log("stolenTracks in the end", stolenTracks);
 }
 const mapPlaylistToTracks = new Map();
 
@@ -49,6 +46,7 @@ function removeStolens(stolenTracks){
     stolenTracks.forEach((track) => {
         getTVTracks(track);
     });
+    // console.log("MAP", mapPlaylistToTracks);
     removeTracks(mapPlaylistToTracks);
 }
 function replace(target, pattern, replacement){
