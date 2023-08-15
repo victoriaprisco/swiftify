@@ -50,7 +50,7 @@ export  async function getTracks (contents) {
     return await result.json();
 }
 
-export function formatJSON(owner, playlistID, tracks){
+export function formatJSON(length, owner, playlistID, tracks){
     var returnJSON = [];
     var i = 0;
     tracks.items.forEach((value)=>{
@@ -61,7 +61,8 @@ export function formatJSON(owner, playlistID, tracks){
                 "uri": value.track.uri,
                 "playlistID": playlistID,
                 "position": i,
-                "owner": owner.id
+                "owner": owner.id,
+                "length": length
             });
         i++;
     });
@@ -84,11 +85,9 @@ function createBody(ids){
     }); 
     return idsToRemove;
 }
-export function removeTracks(map){
+function removeTracks(map){
     // console.log("map?", map);
     map.forEach((value, key)=> {
-        console.log(key);
-        console.log('what the heck is going on');
         const playlistID = key;
         const idsToRemove = createBody(value);
         var headers = new Headers();
@@ -99,12 +98,10 @@ export function removeTracks(map){
         headers: headers,
         body: body
         };
-        console.log("okay im about to make the api call watch me please");
         fetch("https://api.spotify.com/v1/playlists/" + playlistID + "/tracks", requestOptions)
         .then(response => response.text())
         .then(result => {
             console.log("TRACKS HAVE BEEN DELETED", result);
-            // addTVTracks(playlistID, value);
         })
         .catch(error => {
             console.log('error', error);
@@ -114,16 +111,57 @@ export function removeTracks(map){
 }
 
 function getTVIds(ids){
-    var newTracks = [];
-    var positions = [];
-    ids.forEach((id)=>{
-        newTracks.push(id.newTrack.uri);
-        positions.push(id.oldTrack.position);
-        console.log(newTracks, positions);
-    });
-}
-async function addTVTracks(playlistID, ids){
-// `https://api.spotify.com/v1/playlists/${playlistID}/tracks`
-    getTVIds(ids);
     console.log(ids);
+    var TVs = [];
+    ids.forEach((id)=>{
+        TVs.push({"track": id.newTrack, "position": id.oldTrack.position, "playlist": id.oldTrack.playlistID, "length": id.oldTrack.length});
+    })
+    return TVs;
+    // var newTracks = [];
+    // var positions = [];
+    // ids.forEach((id)=>{
+    //     newTracks.push(id.newTrack.uri);
+    //     positions.push(id.oldTrack.position);
+    // });
+    // return [newTracks, positions];
+}
+
+export function addTVTracks(map){
+    map.forEach((value, key)=> {
+        const playlistId = key;
+        console.log(value);
+        // const ids = buildAddRequestBody(value);
+        // const TVs = getTVIds(ids);
+        // console.log(TVs);
+        // const TVTracks = TV[0];
+        // const positions = TV[1];
+        // console.log(TVTracks, positions);
+        for(var trackObject of value){
+            // console.log(track);
+            // const uriString = buildAddRequestBody(TVs);
+            // // console.log(uriString);
+            // const position = Math.min(track.position, track.length);c
+            const track = trackObject.newTrack;
+            var headers = new Headers();
+            headers.append("Authorization", "Bearer " + token);
+            var body = "{\"uris\": [\"" + track.uri + "\"], \"position\": " + trackObject.oldTrack.position + "}";
+            console.log(body);
+            var requestOptions = {
+            method: 'POST',
+            headers: headers,
+            body: body
+            };
+            fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, requestOptions)
+            .catch(error => {
+                console.err('error', error);
+                alert("something went wrong. please refresh and try again!");
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log("TRACKS HAVE BEEN ADDED", result);
+                removeTracks(map);
+
+            })
+        }
+    });
 }

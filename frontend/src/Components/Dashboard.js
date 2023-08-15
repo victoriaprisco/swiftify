@@ -18,7 +18,7 @@ const Dashboard = () => {
             if(playlistList){
                 playlistList.forEach(async (playlist) => {
                     const tracks = await getTracks(playlist.tracks.href);
-                    const formattedTracks = formatJSON(playlist.owner, playlist.id, tracks);
+                    const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
                     getSwiftTracks(profile, formattedTracks);
                     resultsList.push(<Playlist key={playlist.id} object={playlist}/>);
                 });

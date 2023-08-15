@@ -1,4 +1,4 @@
-import { getSong, removeTracks } from './handleAPIRequests';
+import { getSong, addTVTracks } from './handleAPIRequests';
 const TVs = ["Fearless", "Fearless Platinum Edition", "Speak Now", "Speak Now (Deluxe Edition)", "Red", "Red (Deluxe Edition)"];
 const mapPlaylistToTracks = new Map();
 export function getSwiftTracks(profile, playlist){
@@ -51,7 +51,7 @@ async function removeStolens(stolenTracks){
     };
     
     console.log(mapPlaylistToTracks.size);
-    removeTracks(mapPlaylistToTracks);
+    addTVTracks(mapPlaylistToTracks);
 
 }
 function replace(target, pattern, replacement){
