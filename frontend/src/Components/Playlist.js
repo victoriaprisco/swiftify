@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import Song from './Song.js';
 import {getReturnVal, tracksJSON, formatJSON, setContents} from '../scripts/handleAPIRequests.js';
-import { getSwiftTracks } from '../scripts/getSwiftTracks.js';
 
 const Playlist = (props) => {
     
