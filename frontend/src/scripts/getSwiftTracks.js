@@ -39,19 +39,18 @@ function map(song){
 }
 // api call: https://api.spotify.com/v1/search?q={searchTerm}&type=track
 async function removeStolens(stolenTracks){
-    stolenTracks.forEach((track) => {
+    for(var track of stolenTracks) {
         console.log("stolen track", track);
         if(track){
             const searchTerm = replace(track.name, ' ', '+') + "+%28Taylor%27s+Version%28";
-            getSong(searchTerm).then((song)=>{
-                console.log(song);
-                map({"OG": track, "TV": song});
-            });
+            const song = await getSong(searchTerm);
+            console.log(song);
+            map({"OG": track, "TV": song});
         }
         
-    });
+    };
     
-    console.log(mapPlaylistToTracks.length);
+    console.log(mapPlaylistToTracks.size);
     removeTracks(mapPlaylistToTracks);
 
 }
