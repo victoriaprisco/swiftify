@@ -20,7 +20,7 @@ export async function getPlaylists(){
     const limit = 50;
     var total = 100;
     // FIXME commented for 429 error 
-    // while(offset + limit < total){
+    while(offset + limit < total){
         try {
             const result = await fetch(next, {
                 method: "GET", headers: { Authorization: `Bearer ${token}`}
@@ -34,7 +34,7 @@ export async function getPlaylists(){
         catch (e) {
             console.error(e);
         }
-    // }
+    }
     return results;
 }
 export const profile = await (async ()=>{
@@ -54,7 +54,8 @@ export function formatJSON(length, owner, playlistID, tracks){
     var returnJSON = [];
     var i = 0;
     tracks.items.forEach((value)=>{
-        returnJSON.push({
+        if(value && value.track){
+            returnJSON.push({
                 "name": value.track.name,
                 "artist": value.track.artists[0].name,
                 "album":  value.track.album.name,
@@ -65,6 +66,12 @@ export function formatJSON(length, owner, playlistID, tracks){
                 "length": length
             });
         i++;
+        }
+        else{
+            // console.log("returning null, no tracks found");
+            // alert("you don't have any tracks to swiftify!");
+            return null;
+        }
     });
     return returnJSON;
 }
@@ -86,7 +93,6 @@ function createBody(ids){
     return idsToRemove;
 }
 function removeTracks(map){
-    // console.log("map?", map);
     map.forEach((value, key)=> {
         const playlistID = key;
         const idsToRemove = createBody(value);
@@ -110,37 +116,12 @@ function removeTracks(map){
     });
 }
 
-function getTVIds(ids){
-    console.log(ids);
-    var TVs = [];
-    ids.forEach((id)=>{
-        TVs.push({"track": id.newTrack, "position": id.oldTrack.position, "playlist": id.oldTrack.playlistID, "length": id.oldTrack.length});
-    })
-    return TVs;
-    // var newTracks = [];
-    // var positions = [];
-    // ids.forEach((id)=>{
-    //     newTracks.push(id.newTrack.uri);
-    //     positions.push(id.oldTrack.position);
-    // });
-    // return [newTracks, positions];
-}
 
 export function addTVTracks(map){
     map.forEach((value, key)=> {
         const playlistId = key;
         console.log(value);
-        // const ids = buildAddRequestBody(value);
-        // const TVs = getTVIds(ids);
-        // console.log(TVs);
-        // const TVTracks = TV[0];
-        // const positions = TV[1];
-        // console.log(TVTracks, positions);
         for(var trackObject of value){
-            // console.log(track);
-            // const uriString = buildAddRequestBody(TVs);
-            // // console.log(uriString);
-            // const position = Math.min(track.position, track.length);c
             const track = trackObject.newTrack;
             var headers = new Headers();
             headers.append("Authorization", "Bearer " + token);

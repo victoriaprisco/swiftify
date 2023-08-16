@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
+#container {
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    width: 100vw;
+}
+.desc{
+    display: inline-flex;
+    justify-content: center;
+}
+#welcome {
+    font-family: 'Karla', sans-serif;
+    color: #9B5298;
+    line-height: 10vh;
+    font-size: 60px;
+    font-size: 9vw; 
+}
+h3 {
+    color: #4D435D;
+    font-size: 30px;
+    font-size: 4vw; 
+    width: 70%;
+    text-align: center;
+}
+#subheader{
+    display: inline-flex;
+    justify-content: center;
+}
+*{
+    background-color:#f3e2ed;
+}
+#login-button {
+    display: inline-flex;
+    justify-content: center;
+    width: 10vw;
+    border-style: solid;
+    border-color: #332936;
+    background-color: #332936;
+    color:#F3DEE6;
+    text-align: center;
+    height: 5vh;
+    line-height: 4.5vh;
+    font-size: 1vw;
+    padding: 0 0 0 0;
+    border-radius: 10px;
+    will-change: transform;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+@media (max-width: 700px) {
+    #container {
+        padding-top:25vh;
+    }
+    #login-button {
+        height: 10vh;
+        width: 50vw;
+        font-size: 6vw;
+        line-height: 9vh;
+        margin-top:5vh;
+    }
+    h3 {
+        font-size: 30px;
+        font-size: 5vw;
+    }
+}
+#login-button:hover {
+    transform: translateY(-2px);
+    background-color:#F3DEE6;
+    color: #332936;
+    border-style: solid;
+    border-color: #332936;
+    cursor: pointer;
+
+}
+#login-button:active{
+    transform: translateY(0px);
+}
+
+/* 
+
+<!-- HTML !-->
+<button class="button-24" role="button">Button 24</button>
+
+
+.button-24 {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+  }
+  
+  .button-24:hover,
+  .button-24:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+  }
+  
+  .button-24:active {
+    opacity: .5;
+  }
+
+
+
+  <!-- HTML !-->
+<button class="button-28" role="button">Button 28</button>
+
+.button-28 {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+  }
+  
+  .button-28:disabled {
+    pointer-events: none;
+  }
+  
+  .button-28:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .button-28:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+
+  */

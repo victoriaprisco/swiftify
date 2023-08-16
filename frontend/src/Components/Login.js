@@ -1,13 +1,13 @@
 import {completeAuth} from '../scripts/authorization.js';
+import "../styles/Login.css";
 
 const Login = () => {
     return (
-        <>
-            <h1>welcome to swiftify</h1>
-            <h3>replace all the stolen versions with taylor's versions on playlists made by you</h3>
-            <h4>log in to spotify to continue</h4>
-            <button onClick={completeAuth}>login to spotify </button> 
-        </>
+        <div id="container">
+            <h1 id="welcome" class="desc">welcome to swiftify!</h1>
+            <span id="subheader"><h3 class="desc">replace all the stolen songs with taylor's versions on your playlists</h3></span>
+            <div class="desc"><button id="login-button" onClick={completeAuth}>login to spotify </button> </div>
+        </div>
     )
 }
 export default Login;

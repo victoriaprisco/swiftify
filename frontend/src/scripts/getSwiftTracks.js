@@ -13,10 +13,9 @@ export function getSwiftTracks(profile, playlist){
     if(stolenTracks.length != 0){
         removeStolens(stolenTracks);
     }
-}
-var advance = false;
-async function getTVTracks(track){
-    
+    else {
+        return "no tracks";
+    }
 }
 function map(song){
     const track = song.OG;
@@ -28,7 +27,6 @@ function map(song){
             "oldTrack": track,
             "newTrack": TV.tracks.items[0]
         });
-        // mapPlaylistToTracks.set(track.playlistID, oldList);
     }
     else {
         mapPlaylistToTracks.set(track.playlistID, [{
@@ -37,7 +35,6 @@ function map(song){
         }]);
     }
 }
-// api call: https://api.spotify.com/v1/search?q={searchTerm}&type=track
 async function removeStolens(stolenTracks){
     for(var track of stolenTracks) {
         console.log("stolen track", track);
