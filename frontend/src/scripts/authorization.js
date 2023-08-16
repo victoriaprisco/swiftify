@@ -23,8 +23,8 @@ async function generateCodeChallenge(codeVerifier) {
   }
 export function completeAuth(){
     const clientID = process.env.REACT_APP_SPOTIFY_API_TOKEN;
-    // const redirectURI = 'https://victoriaprisco.github.io/swiftify/';
-    const redirectURI = 'http://localhost:3000/'
+    const redirectURI = 'https://victoriaprisco.github.io/swiftify/index.html';
+    // const redirectURI = 'http://localhost:3000/'
     var codeVerifier = generateKey(128);
     
     generateCodeChallenge(codeVerifier).then(challenge => {
