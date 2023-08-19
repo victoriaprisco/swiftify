@@ -1,7 +1,7 @@
 import { getSong, addTVTracks } from './handleAPIRequests';
 const TVs = ["Fearless", "Fearless Platinum Edition", "Speak Now", "Speak Now (Deluxe Edition)", "Red", "Red (Deluxe Edition)"];
 const mapPlaylistToTracks = new Map();
-export function getSwiftTracks(profile, playlist){
+export async function getSwiftTracks(profile, playlist){
     var stolenTracks = [];
     playlist.forEach((track)=>{
         if(track.owner === profile.id && track.artist === "Taylor Swift"){
@@ -10,29 +10,39 @@ export function getSwiftTracks(profile, playlist){
             }
         }
     });
-    if(stolenTracks.length != 0){
-        removeStolens(stolenTracks);
+    if(stolenTracks.length === 0){
+        return "no tracks";
     }
     else {
-        return "no tracks";
+        await removeStolens(stolenTracks);
+        return "done";
     }
 }
 function map(song){
     const track = song.OG;
     const TV = song.TV;
-    console.log(track.name, "->", TV.tracks.items[0].name, ": ", track.playlistID);
-    if(mapPlaylistToTracks.has(track.playlistID)){
-        const oldList = mapPlaylistToTracks.get(track.playlistID);
-        oldList.push({
-            "oldTrack": track,
-            "newTrack": TV.tracks.items[0]
-        });
+    if(TV){
+        console.log(track.name, "->", TV.tracks.items[0].name, ": ", track.playlistID);
+        var TVTrack = TV.tracks.items[0];
+        if(TV.tracks.items[0].artists[0].name != "Taylor Swift"){
+            TVTrack = TV.tracks.items[1];
+        }
+        if(mapPlaylistToTracks.has(track.playlistID)){
+            const oldList = mapPlaylistToTracks.get(track.playlistID);
+            oldList.push({
+                "oldTrack": track,
+                "newTrack": TVTrack
+            });
+        }
+        else {
+            mapPlaylistToTracks.set(track.playlistID, [{
+                "oldTrack": track,
+                "newTrack": TVTrack
+            }]);
+        }
     }
     else {
-        mapPlaylistToTracks.set(track.playlistID, [{
-            "oldTrack": track,
-            "newTrack": TV.tracks.items[0]
-        }]);
+        console.log("song not found");
     }
 }
 async function removeStolens(stolenTracks){
@@ -42,13 +52,16 @@ async function removeStolens(stolenTracks){
             const searchTerm = replace(track.name, ' ', '+') + "+%28Taylor%27s+Version%28";
             const song = await getSong(searchTerm);
             console.log(song);
-            map({"OG": track, "TV": song});
+            if(song.tracks.items.length != 0){
+                map({"OG": track, "TV": song});
+            }
+            else {
+                console.log("no TV track");
+            }
         }
         
     };
-    
-    console.log(mapPlaylistToTracks.size);
-    addTVTracks(mapPlaylistToTracks);
+    addTVTracks(mapPlaylistToTracks, 0);
 
 }
 function replace(target, pattern, replacement){

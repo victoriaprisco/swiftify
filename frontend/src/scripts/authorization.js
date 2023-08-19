@@ -23,8 +23,8 @@ async function generateCodeChallenge(codeVerifier) {
   }
 export function completeAuth(){
     const clientID = process.env.REACT_APP_SPOTIFY_API_TOKEN;
-    const redirectURI = 'https://victoriaprisco.github.io/swiftify/index.html';
-    // const redirectURI = 'http://localhost:3000/'
+    // const redirectURI = 'https://victoriaprisco.github.io/swiftify';
+    const redirectURI = 'http://localhost:3000'
     var codeVerifier = generateKey(128);
     
     generateCodeChallenge(codeVerifier).then(challenge => {
@@ -46,18 +46,24 @@ export function completeAuth(){
 
 export async function getToken(code){
   const verifier = localStorage.getItem("code_verifier");
-  const redirectURI = 'http://localhost:3000/'
+  const redirectURI = 'http://localhost:3000'
+  // const redirectURI = "https://victoriaprisco.github.io/swiftify"
   const params = new URLSearchParams();
   params.append("client_id", process.env.REACT_APP_SPOTIFY_API_TOKEN);
   params.append("grant_type", "authorization_code");
   params.append("code", code);
   params.append("redirect_uri", redirectURI);
   params.append("code_verifier", verifier);
-  const result = await fetch("https://accounts.spotify.com/api/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: params
-  });
-  const token = await result.json();
-  return token;
+  try {
+    const result = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params
+    });
+    const token = await result.json();
+    return token;
+  }
+  catch (error) { 
+    console.log("From getToken =>", error);
+  }
 }
