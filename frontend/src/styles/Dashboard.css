@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
+#start-button {
+    display: inline-flex;
+    width: 20vw;
+    border-style: solid;
+    border-color: #332936;
+    background-color: #332936;
+    color:#F3DEE6;
+    text-align: center;
+    height: 9vh;
+    line-height: 8vh;
+    font-size: 3vw;
+    padding: 0 0 0 0;
+    border-radius: 10px;
+}
+#button-container{
+    display:flex;
+    justify-content: center;
+}
+#start-button:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    background-color: #9B5298;
+    font-weight: bold;
+}
+#start-button:active{
+    transform: translateY(0px);
+}
+.info {
+    font-family: 'Karla', sans-serif;
+    justify-content: center;
+    display:grid;
+    text-align: center;
+    color: #332936;
+    font-size: 20px;
+    font-size: 2vw; 
+}
+#username {
+    color: #9B5298;
+    font-size: 30px;
+    font-size: 5vw;
+}
+#container2 {
+    display: flex;
+    flex-direction: column;
+    padding:10vh 4vw;
+}
+
+@media (max-width: 700px) {
+    #container2{
+        padding:10vw 4vw;
+    }
+}

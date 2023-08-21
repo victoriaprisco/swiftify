@@ -1,21 +1,18 @@
 import Home from './Home.js';
-import {getProfile, getPlaylists, getTracks, formatJSON} from '../scripts/handleAPIRequests.js';
-import { getSwiftTracks } from '../scripts/getSwiftTracks.js';
+import {profile, getPlaylists, getTracks, formatJSON} from '../scripts/handleAPIRequests.js';
+import { clearMap, getSwiftTracks } from '../scripts/getSwiftTracks.js';
+import "../styles/Dashboard.css";
 
-export const profile = await (async ()=>{
-    const profile = await getProfile();
-    return profile;
-})();
 
 const Dashboard = () => {
     return(
-    <> 
-        {profile.display_name ? <h1>hey {profile.display_name}!</h1> : <Home reload={true}/> }
+    <div id="container2"> 
+        {profile.display_name ? <h1 id="username" className="info">hey {profile.display_name}!</h1> : <Home reload={true}/> }
         {profile.display_name && <>
-        <p>Now that you've connected your Spotify, press the button below to remove all of the stolen Taylor songs from your playlists and replace them with Taylor's Versions. </p>
-        <p>We will keep the order of your playlists and other non-Taylor songs that are on it!</p>
-        <button onClick={()=> {
-            var noTracks = "";
+        <p className="info">Now that you've connected your Spotify, press the button below to remove all of the stolen Taylor songs from your playlists and replace them with Taylor's Versions. </p>
+        <p className="info">We will keep the order of your playlists and other non-Taylor songs that are on it!</p>
+        <span id="button-container"><button className="info" id="start-button" onClick={()=> {
+            var noTracks = false;
             getPlaylists().then((playlists)=>{
                 if(playlists){
                     playlists.forEach((playlistList)=>{
@@ -25,23 +22,19 @@ const Dashboard = () => {
                                     getTracks(playlist.tracks.href).then((tracks)=>{
                                         if(tracks){
                                             const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
-                                            // console.log("tracks have been formatted", formattedTracks);
                                             if(formattedTracks == null){
                                                 console.log("we got null");
                                                 return;
                                             }
                                             else{
                                                 getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
-                                                    // console.log(foundTracks === "no tracks");
-                                                    noTracks = foundTracks === "no tracks";
+                                                    noTracks = foundTracks !== "no tracks";
                                                 });
-                                                
                                             } 
                                         }  
                                     }).catch((e)=>{
                                         console.error(e);
                                     });
-                                    
                                 }
                                 else {
                                     alert("something went wrong. please wait a few minutes and try again!");
@@ -50,13 +43,15 @@ const Dashboard = () => {
                         }
                     });
                 }
+                clearMap();
+                console.log("DONE");
             }).catch((e)=>console.error(e));
             console.log(noTracks);
-            
-        }}> swiftify me !! </button>
+
+        }}> swiftify me !! </button></span>
         </>
     }
-    </>
+    </div>
     );
 }
 

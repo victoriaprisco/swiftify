@@ -1,6 +1,6 @@
 import { getSong, addTVTracks } from './handleAPIRequests';
 const TVs = ["Fearless", "Fearless Platinum Edition", "Speak Now", "Speak Now (Deluxe Edition)", "Red", "Red (Deluxe Edition)"];
-const mapPlaylistToTracks = new Map();
+var mapPlaylistToTracks = new Map();
 export async function getSwiftTracks(profile, playlist){
     var stolenTracks = [];
     playlist.forEach((track)=>{
@@ -14,9 +14,12 @@ export async function getSwiftTracks(profile, playlist){
         return "no tracks";
     }
     else {
-        await removeStolens(stolenTracks);
+        await removeStolens(playlist, stolenTracks);
         return "done";
     }
+}
+export function clearMap(){
+    mapPlaylistToTracks.clear();
 }
 function map(song){
     const track = song.OG;
@@ -24,7 +27,7 @@ function map(song){
     if(TV){
         console.log(track.name, "->", TV.tracks.items[0].name, ": ", track.playlistID);
         var TVTrack = TV.tracks.items[0];
-        if(TV.tracks.items[0].artists[0].name != "Taylor Swift"){
+        if(TV.tracks.items[0].artists[0].name !== "Taylor Swift"){
             TVTrack = TV.tracks.items[1];
         }
         if(mapPlaylistToTracks.has(track.playlistID)){
@@ -45,15 +48,17 @@ function map(song){
         console.log("song not found");
     }
 }
-async function removeStolens(stolenTracks){
+async function removeStolens(playlist, stolenTracks){
+    var tracks = [];
     for(var track of stolenTracks) {
         console.log("stolen track", track);
         if(track){
             const searchTerm = replace(track.name, ' ', '+') + "+%28Taylor%27s+Version%28";
             const song = await getSong(searchTerm);
             console.log(song);
-            if(song.tracks.items.length != 0){
-                map({"OG": track, "TV": song});
+            if(song.tracks.items.length !== 0){
+                tracks.push({"oldTrack": track, "newTrack": song});
+                // map({"OG": track, "TV": song});
             }
             else {
                 console.log("no TV track");
@@ -61,7 +66,7 @@ async function removeStolens(stolenTracks){
         }
         
     };
-    addTVTracks(mapPlaylistToTracks, 0);
+    addTVTracks(playlist, tracks);
 
 }
 function replace(target, pattern, replacement){
