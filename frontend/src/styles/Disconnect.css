@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
+
+#disconnect {
+    display: flex;
+    flex-direction: column;
+    width: 40vh;
+    margin-top:20px;    
+    /* position: relative;
+    top:auto; */
+    font-family: 'Karla', sans-serif;
+}
+
+a {
+    /* color: #332936; */
+    font-weight:300;
+    background-color: #332936;
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 15px;
+    will-change: transform;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+
+a:hover{
+    transform: translateY(-2px);
+    background-color:#9b5398;
+    cursor: pointer; 
+}
+a:active {
+    transform: translateY(0px);
+}
+p {
+    color: #9b5398;
+}

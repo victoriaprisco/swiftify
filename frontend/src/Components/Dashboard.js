@@ -1,4 +1,5 @@
 import Home from './Home.js';
+import Disconnect from './Disconnect.js';
 import Spotify from './Spotify.js'
 import {profile, getPlaylists, getTracks, formatJSON} from '../scripts/handleAPIRequests.js';
 import { clearMap, getSwiftTracks } from '../scripts/getSwiftTracks.js';
@@ -50,7 +51,9 @@ const Dashboard = () => {
             console.log(noTracks);
 
         }}> swiftify me !! </button></span>
-        <Spotify id="image"/>
+        <div id="row">
+            <Spotify id="image"/>
+        </div>
         </>
     }
     </div>

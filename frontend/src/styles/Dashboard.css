@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap');
 #start-button {
+    padding: 20px;
     display: inline-flex;
     width: 20vw;
     border-style: solid;
@@ -43,17 +44,8 @@
 #container2 {
     display: flex;
     flex-direction: column;
-    /* justify-items: center; */
+    justify-items: center;
     /* padding:10vh 4vw; */
-}
-#image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top:20vh;
-    width: 30vw;
-    margin: 0 auto;
-
 }
 
 
