@@ -4,7 +4,7 @@
     /* justify-content: center; */
     flex-direction: column;
     width: 100vw;
-    padding-top:10vw;
+    /* padding-top:5vw; */
 }
 .desc{
     display: inline-flex;
