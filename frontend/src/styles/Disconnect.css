@@ -10,7 +10,7 @@
     font-family: 'Karla', sans-serif;
 }
 
-a {
+#btn {
     /* color: #332936; */
     font-weight:300;
     background-color: #332936;
@@ -23,12 +23,12 @@ a {
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
 }
 
-a:hover{
+#btn:hover{
     transform: translateY(-2px);
     background-color:#9b5398;
     cursor: pointer; 
 }
-a:active {
+#btn:active {
     transform: translateY(0px);
 }
 p {

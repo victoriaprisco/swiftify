@@ -6,7 +6,7 @@ const Spotify = () => {
     return (<>
     <div id="spotify">
         <Disconnect />
-        <img id="image" src={Image}></img>
+        <a id="image" href="https://www.spotify.com/"><img src={Image}></img></a>
     </div>
     </>)
 
