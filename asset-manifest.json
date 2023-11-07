@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/swiftify/static/css/main.6ca02d11.css",
-    "main.js": "/swiftify/static/js/main.62cf33f5.js",
+    "main.css": "/swiftify/static/css/main.d30b72df.css",
+    "main.js": "/swiftify/static/js/main.7f8ed230.js",
     "static/js/787.cda612ba.chunk.js": "/swiftify/static/js/787.cda612ba.chunk.js",
     "static/media/logos.svg": "/swiftify/static/media/logos.06cbe6011c3b3fbcfacc6775db299ca7.svg",
     "index.html": "/swiftify/index.html",
-    "main.6ca02d11.css.map": "/swiftify/static/css/main.6ca02d11.css.map",
-    "main.62cf33f5.js.map": "/swiftify/static/js/main.62cf33f5.js.map",
+    "main.d30b72df.css.map": "/swiftify/static/css/main.d30b72df.css.map",
+    "main.7f8ed230.js.map": "/swiftify/static/js/main.7f8ed230.js.map",
     "787.cda612ba.chunk.js.map": "/swiftify/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ca02d11.css",
-    "static/js/main.62cf33f5.js"
+    "static/css/main.d30b72df.css",
+    "static/js/main.7f8ed230.js"
   ]
 }
