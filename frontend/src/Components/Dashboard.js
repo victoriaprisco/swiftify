@@ -1,65 +1,110 @@
-import Home from './Home.js';
-import Disconnect from './Disconnect.js';
-import Spotify from './Spotify.js'
-import {profile, getPlaylists, getTracks, formatJSON} from '../scripts/handleAPIRequests.js';
-import { clearMap, getSwiftTracks } from '../scripts/getSwiftTracks.js';
+import Home from "./Home.js";
+import Spotify from "./Spotify.js";
+import {
+  profile,
+  getPlaylists,
+  getTracks,
+  formatJSON,
+} from "../scripts/handleAPIRequests.js";
+import { clearMap, getSwiftTracks } from "../scripts/getSwiftTracks.js";
 import "../styles/Dashboard.css";
+import React, { useState } from 'react';
 
+
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 const Dashboard = () => {
-    return(
-    <div id="container2"> 
-        {profile.display_name ? <h1 id="username" className="info">hey {profile.display_name}!</h1> : <Home reload={true}/> }
-        {profile.display_name && <>
-        <p className="info">Now that you've connected your Spotify, press the button below to remove all of the stolen Taylor songs from your playlists and replace them with Taylor's Versions. </p>
-        <p className="info">We will keep the order of your playlists and other non-Taylor songs that are on it!</p>
-        <span id="button-container"><button className="info" id="start-button" onClick={()=> {
-            var noTracks = false;
-            getPlaylists().then((playlists)=>{
-                if(playlists){
-                    playlists.forEach((playlistList)=>{
-                        if(playlistList){
-                            playlistList.forEach((playlist) => {
-                                    if(playlist && playlist.owner.display_name === profile.display_name){
-                                        console.log("for ", playlist)
-                                        setTimeout(()=> {
-                                            console.log("in timeout")
-                                            getTracks(playlist.tracks.href).then((tracks)=>{
-                                            console.log(" got tracks ", tracks)
-                                            if(tracks){
-                                                const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
-                                                if(formattedTracks == null){
-                                                    console.log("we got null");
-                                                    return;
-                                                }
-                                                else{
-                                                    getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
-                                                        noTracks = foundTracks !== "no tracks";
-                                                    });
-                                                } 
-                                            }  
-                                        }).catch((e)=>{
-                                            console.error(e);
-                                        });
-                                        }, 9000)
-                                    }
-                            });
+    const [pressed, setPressed] = useState("swiftify me !!");
+    return (
+        <div id="container2">
+        {profile.display_name ? (
+            <h1 id="username" className="info">
+            hey {profile.display_name}!
+            </h1>
+        ) : (
+            <Home reload={true} />
+        )}
+        {profile.display_name && (
+            <>
+            <p className="info">
+                Now that you've connected your Spotify, press the button below to
+                remove all of the stolen Taylor songs from your playlists and
+                replace them with Taylor's Versions.{" "}
+            </p>
+            <p className="info">
+                We will keep the order of your playlists and other non-Taylor songs that are on it!
+            </p>
+            <p className="info">
+                If you have a lot of playlists, this process might take a minute. We will update you when we are done! 
+            </p>
+            <span id="button-container">
+                <button
+                className="info"
+                id="start-button"
+                onClick={async () => {
+                    var progress = "in progress..."
+                    setPressed(progress)
+                    var noTracks = false;
+                    const playlists = await getPlaylists();
+                    if (!playlists) {
+                    alert("something went wrong.");
+                    return;
+                    }
+                    for(var playlistList in playlists){
+                        var list = playlists[playlistList]
+                        if(!list) {
+                            return;
                         }
-                    });
-                }
-                clearMap();
-                console.log("DONE");
-            }).catch((e)=>console.error(e));
-            console.log(noTracks);
-
-        }}> swiftify me !! </button></span>
-        <div id="row">
-            <Spotify id="image"/>
+                        for (const i in list) {
+                            if(progress.length > 16) {
+                                progress = "in progress.."
+                            }
+                            else {
+                                progress += "."
+                            }
+                            setPressed(progress)
+                            var playlist = list[i]
+                            if(!playlist){
+                                return;
+                            }
+                            if (playlist) {
+                                const tracks = await getTracks(playlist.tracks.href)
+                                if(tracks){
+                                    const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
+                                    if(formattedTracks == null){
+                                        console.log("we got null");
+                                        return;
+                                    }
+                                    else{
+                                        getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
+                                            noTracks = foundTracks !== "no tracks";
+                                        });
+                                    }
+                                }
+                                await sleep(100);
+                                
+                            }
+                        }
+                    }
+                    clearMap();
+                    console.log("DONE");
+                    setPressed("done!")
+                    if(noTracks == true) {
+                        alert("we didn't find any tracks to swiftify!")
+                    }
+                    console.log(noTracks);
+                }}
+                >
+                {pressed}
+                </button>
+            </span>
+            <div id="row">
+                <Spotify id="image" />
+            </div>
+            </>
+        )}
         </div>
-        </>
-    }
-    </div>
-    );
-}
+  );
+};
 
 export default Dashboard;

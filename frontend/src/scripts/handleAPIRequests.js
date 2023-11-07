@@ -124,7 +124,6 @@ export async function addTVTracks(playlist, tracks){
     // map.forEach(async (value, key)=> {
     const playlistId = playlist[0].playlistID;
     for(var trackObject of tracks){
-        console.log(trackObject);
         const track = trackObject.newTrack;
         var newTrack = track.tracks.items[0];
         if(newTrack.artists[0].name !== "Taylor Swift"){
@@ -133,7 +132,6 @@ export async function addTVTracks(playlist, tracks){
         var headers = new Headers();
         headers.append("Authorization", "Bearer " + token);
         var body = "{\"uris\": [\"" + newTrack.uri + "\"], \"position\": " + trackObject.oldTrack.position + "}";
-        console.log(body);
         var requestOptions = {
             method: 'POST',
             headers: headers,
@@ -150,7 +148,5 @@ export async function addTVTracks(playlist, tracks){
             console.log(result);
         }
     }
-    // });
-    console.log(addedTracks);
     removeTracks(playlist, addedTracks);
 }

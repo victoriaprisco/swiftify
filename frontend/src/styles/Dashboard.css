@@ -12,6 +12,7 @@
     line-height: 8vh;
     font-size: 3vw;
     padding: 0 0 0 0;
+    margin-top:10px;
     border-radius: 10px;
 }
 #button-container{
@@ -40,6 +41,7 @@
     color: #9B5298;
     font-size: 30px;
     font-size: 5vw;
+    margin-top: 0px;
 }
 #container2 {
     display: flex;
@@ -52,5 +54,6 @@
 @media (max-width: 700px) {
     #container2{
         padding:10vw 4vw;
+        padding-top:0px;
     }
 }
