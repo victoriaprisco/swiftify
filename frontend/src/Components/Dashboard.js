@@ -20,27 +20,29 @@ const Dashboard = () => {
                     playlists.forEach((playlistList)=>{
                         if(playlistList){
                             playlistList.forEach((playlist) => {
-                                if(playlist){
-                                    getTracks(playlist.tracks.href).then((tracks)=>{
-                                        if(tracks){
-                                            const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
-                                            if(formattedTracks == null){
-                                                console.log("we got null");
-                                                return;
-                                            }
-                                            else{
-                                                getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
-                                                    noTracks = foundTracks !== "no tracks";
-                                                });
-                                            } 
-                                        }  
-                                    }).catch((e)=>{
-                                        console.error(e);
-                                    });
-                                }
-                                else {
-                                    alert("something went wrong. please wait a few minutes and try again!");
-                                }
+                                    if(playlist && playlist.owner.display_name === profile.display_name){
+                                        console.log("for ", playlist)
+                                        setTimeout(()=> {
+                                            console.log("in timeout")
+                                            getTracks(playlist.tracks.href).then((tracks)=>{
+                                            console.log(" got tracks ", tracks)
+                                            if(tracks){
+                                                const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
+                                                if(formattedTracks == null){
+                                                    console.log("we got null");
+                                                    return;
+                                                }
+                                                else{
+                                                    getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
+                                                        noTracks = foundTracks !== "no tracks";
+                                                    });
+                                                } 
+                                            }  
+                                        }).catch((e)=>{
+                                            console.error(e);
+                                        });
+                                        }, 9000)
+                                    }
                             });
                         }
                     });

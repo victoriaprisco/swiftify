@@ -1,5 +1,5 @@
 import { getSong, addTVTracks } from './handleAPIRequests';
-const TVs = ["Fearless", "Fearless Platinum Edition", "Speak Now", "Speak Now (Deluxe Edition)", "Red", "Red (Deluxe Edition)"];
+const TVs = ["Fearless", "Fearless Platinum Edition", "Speak Now", "Speak Now (Deluxe Edition)", "Red", "Red (Deluxe Edition)", "1989", "1989 (Deluxe Edition)"];
 var mapPlaylistToTracks = new Map();
 export async function getSwiftTracks(profile, playlist){
     var stolenTracks = [];
