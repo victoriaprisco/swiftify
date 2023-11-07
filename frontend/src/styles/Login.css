@@ -6,7 +6,7 @@
     display: flex;
     /* justify-content: center; */
     flex-direction: column;
-    width: 100vw;
+    /* width: 100vw; */
     /* padding-top:5vw; */
 }
 .desc{
@@ -16,10 +16,10 @@
 #welcome {
     font-family: 'Karla', sans-serif;
     color: #9B5298;
-    line-height: 10vh;
     font-size: 60px;
     font-size: 7vw; 
-    padding-bottom:20px;
+    height: fit-content;
+    margin:0px;
 }
 h3 {
     color: #4D435D;
@@ -56,16 +56,32 @@ h3 {
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
 }
 @media (max-width: 700px) {
+    #welcome {
+        /* margin: 15px; */
+        font-size: 20vw;
+        text-align: center;
+        width: 100%;
+    }
     #login-button {
-        height: 10vh;
+        height: 20vw;
         width: 50vw;
         font-size: 6vw;
-        line-height: 9vh;
-        margin-top:5vh;
+        line-height: 20vw;
+        /* margin-top:5vh; */
+        overflow-y: hidden;
+        transition: none;
     }
     h3 {
         font-size: 30px;
         font-size: 5vw;
+    }
+    #spotify {
+        display: flex;
+        flex-direction: column;
+    }
+    #disconnect {
+        position: relative;
+        align-items: center;
     }
 }
 #login-button:hover {

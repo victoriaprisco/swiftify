@@ -52,8 +52,20 @@
 
 
 @media (max-width: 700px) {
-    #container2{
-        padding:10vw 4vw;
-        padding-top:0px;
+    #username {
+        font-size: 15vw;
+        padding: 0px 10px;
+        text-align: center;
+        width: 100%;
+    }
+    .info {
+        font-size: 5vw;
+        padding: 0px 10px;
+    }
+    #start-button {
+        width: 50vw;
+        height: 9vh;
+        font-size: 7vw;
+
     }
 }
