@@ -57,7 +57,7 @@ const Dashboard = () => {
                         }
                         for (const i in list) {
                             if(progress.length > 16) {
-                                progress = "in progress.."
+                                progress = "working.."
                             }
                             else {
                                 progress += "."
@@ -81,7 +81,7 @@ const Dashboard = () => {
                                         });
                                     }
                                 }
-                                await sleep(100);
+                                await sleep(50);
                                 
                             }
                         }

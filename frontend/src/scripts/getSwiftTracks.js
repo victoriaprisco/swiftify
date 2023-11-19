@@ -30,7 +30,7 @@ async function removeStolens(playlist, stolenTracks){
             const searchTerm = replace(track_name, ' ', '+') + "+%28Taylor%27s+Version%28";
             const song = await getSong(searchTerm);
             if(song) {
-                console.log(track.name + " => " + song.tracks.items[0].name);
+                // console.log(track.name + " => " + song.tracks.items[0].name);
                 if(song.tracks.items.length !== 0){
                     tracks.push({"oldTrack": track, "newTrack": song});
                 }
