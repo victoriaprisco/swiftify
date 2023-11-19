@@ -19,6 +19,8 @@
     font-size: 60px;
     font-size: 7vw; 
     height: fit-content;
+    text-align: center;
+    padding-top: 40px;
     margin:0px;
 }
 h3 {
