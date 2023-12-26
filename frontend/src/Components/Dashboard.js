@@ -77,7 +77,7 @@ const Dashboard = () => {
                                     }
                                     else{
                                         getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
-                                            noTracks = foundTracks !== "no tracks";
+                                            noTracks = foundTracks === "no tracks";
                                         });
                                     }
                                 }
