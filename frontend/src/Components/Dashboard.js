@@ -18,7 +18,7 @@ const Dashboard = () => {
     return (
         <div id="container2">
         {profile.display_name ? (
-            <h1 id="username" className="info">
+            <h1 id="username" >
             hey {profile.display_name}!
             </h1>
         ) : (
@@ -44,7 +44,7 @@ const Dashboard = () => {
                 onClick={async () => {
                     var progress = "in progress..."
                     setPressed(progress)
-                    var noTracks = false;
+                    var noTracks = true;
                     const playlists = await getPlaylists();
                     if (!playlists) {
                     alert("something went wrong.");
@@ -68,6 +68,7 @@ const Dashboard = () => {
                                 return;
                             }
                             if (playlist) {
+                                console.log("NO TRACKS:", noTracks)
                                 const tracks = await getTracks(playlist.tracks.href)
                                 if(tracks){
                                     const formattedTracks = formatJSON(playlist.tracks.total, playlist.owner, playlist.id, tracks);
@@ -77,11 +78,11 @@ const Dashboard = () => {
                                     }
                                     else{
                                         getSwiftTracks(profile, formattedTracks).then((foundTracks)=>{
-                                            noTracks = foundTracks === "no tracks";
+                                            noTracks = foundTracks === "no tracks" && noTracks;
                                         });
                                     }
                                 }
-                                await sleep(50);
+                                await sleep(20);
                                 
                             }
                         }
