@@ -4,7 +4,7 @@ const Disconnect = () => {
     return (<>
     <div id="disconnect">
         <a id="btn" href="https://www.spotify.com/account/apps/">Disconnect from Swiftify</a>
-        <p>This app will be titled "swiftify" at this link - click "Remove Acccess" to remove our access to your account.</p>
+        <p id="text">This app will be titled "swiftify" at this link - click "Remove Acccess" to remove our access to your account.</p>
     </div>
     </>)
 }
