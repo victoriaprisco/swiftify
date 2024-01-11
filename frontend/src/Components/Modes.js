@@ -67,15 +67,15 @@ const Modes = () => {
         document.documentElement.style.setProperty('--highlight',target_color.highlight);
         document.documentElement.style.setProperty('--button',target_color.button);
         document.documentElement.style.setProperty('--buttonsecondary',target_color.buttonsecondary);
-        sessionStorage.setItem("mode", clicked)
+        localStorage.setItem("mode", clicked)
     }
-    var thing = sessionStorage.getItem('mode')
-    if(sessionStorage.getItem("mode") === undefined || sessionStorage.getItem("mode") === null){
-        sessionStorage.setItem("mode", "1989")
+    var thing = localStorage.getItem('mode')
+    if(localStorage.getItem("mode") === undefined || localStorage.getItem("mode") === null){
+        localStorage.setItem("mode", "1989")
         thing = "1989"
     }
     useEffect(()=>{
-        changeMode(undefined, sessionStorage.getItem("mode"))
+        changeMode(undefined, localStorage.getItem("mode"))
     })
     return (<>
         <form onChange={(e)=>changeMode(e, undefined)}>
