@@ -79,7 +79,7 @@ const Modes = () => {
     })
     return (<>
         <form onChange={(e)=>changeMode(e, undefined)}>
-            <h4>page styles</h4>
+            <h4>page themes</h4>
             <label>
                 Speak Now
                 <input type="radio" name="mode" value="sn" defaultChecked={thing === "sn"}/>
