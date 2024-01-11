@@ -7,7 +7,8 @@ const Home = (props) => {
         <>
                 {/* {props.reload === true || window.location.href === 'https://victoriaprisco.github.io/swiftify/' ?  */}
 
-        
+        <Modes />
+
         {props.reload === true || window.location.href === 'https://victoriaprisco.github.io/swiftify/' ?
             <Login /> :
             <Dashboard />

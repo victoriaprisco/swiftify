@@ -1,6 +1,6 @@
 import Home from "./Home.js";
 import Spotify from "./Spotify.js";
-import Modes from "./Modes.js";
+
 import {
   profile,
   getPlaylists,
@@ -18,14 +18,10 @@ const Dashboard = () => {
     const [pressed, setPressed] = useState("swiftify me !!");
     return (
         <div id="container2">
-            <Modes />
-        {profile.display_name ? (
+       
             <h1 id="username" >
             hey {profile.display_name}!
             </h1>
-        ) : (
-            <Home reload={true} />
-        )}
         
         {profile.display_name && (
             <>
