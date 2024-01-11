@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/swiftify/static/css/main.282f7484.css",
-    "main.js": "/swiftify/static/js/main.73b3cc33.js",
+    "main.js": "/swiftify/static/js/main.79060dfc.js",
     "static/js/787.cda612ba.chunk.js": "/swiftify/static/js/787.cda612ba.chunk.js",
     "static/media/logos.svg": "/swiftify/static/media/logos.06cbe6011c3b3fbcfacc6775db299ca7.svg",
     "index.html": "/swiftify/index.html",
     "main.282f7484.css.map": "/swiftify/static/css/main.282f7484.css.map",
-    "main.73b3cc33.js.map": "/swiftify/static/js/main.73b3cc33.js.map",
+    "main.79060dfc.js.map": "/swiftify/static/js/main.79060dfc.js.map",
     "787.cda612ba.chunk.js.map": "/swiftify/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.282f7484.css",
-    "static/js/main.73b3cc33.js"
+    "static/js/main.79060dfc.js"
   ]
 }
