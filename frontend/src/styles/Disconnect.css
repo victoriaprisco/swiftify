@@ -16,9 +16,8 @@
 }
 
 #btn {
-    /* color: #332936; */
     font-weight:300;
-    background-color: #332936;
+    background-color: var(--button);
     color: white;
     text-decoration: none;
     width: fit-content;
@@ -32,14 +31,14 @@
 
 #btn:hover{
     transform: translateY(-2px);
-    background-color:#9b5398;
+    background-color: var(--buttonsecondary);
     cursor: pointer; 
 }
 #btn:active {
     transform: translateY(0px);
 }
 p {
-    color: #9b5398;
+    color: var(--buttonsecondary);
     text-align: center;
 }
 

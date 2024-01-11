@@ -4,9 +4,9 @@
     display: inline-flex;
     width: 20vw;
     border-style: solid;
-    border-color: #332936;
-    background-color: #332936;
-    color:#F3DEE6;
+    border-color: var(--button);
+    background-color: var(--button);
+    color: var(--primary);
     text-align: center;
     height: 9vh;
     line-height: 8vh;
@@ -22,8 +22,8 @@
 #start-button:hover {
     cursor: pointer;
     transform: translateY(-2px);
-    background-color: #9B5298;
-    font-weight: bold;
+    background-color: var(--buttonsecondary);
+    border-color: var(--buttonsecondary);
 }
 #start-button:active{
     transform: translateY(0px);
@@ -33,16 +33,17 @@
     justify-content: center;
     display:grid;
     text-align: center;
-    color: #332936;
+    color: var(--button);
     font-size: 20px;
     font-size: 2vw; 
 }
 #username {
     font-family: 'Karla', sans-serif;
-    color: #9B5298;
+    color: var(--secondary);
     font-size: 30px;
     font-size: 5vw;
     margin-top: 0px;
+    text-align:center;
 }
 #container2 {
     display: flex;

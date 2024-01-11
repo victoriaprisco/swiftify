@@ -15,7 +15,7 @@
 }
 #welcome {
     font-family: 'Karla', sans-serif;
-    color: #9B5298;
+    color: var(--secondary);
     font-size: 60px;
     font-size: 7vw; 
     height: fit-content;
@@ -24,7 +24,7 @@
     margin:0px;
 }
 h3 {
-    color: #4D435D;
+    color: var(--highlight);
     font-size: 30px;
     font-size: 3vw; 
     width: 70%;
@@ -36,7 +36,7 @@ h3 {
     padding-bottom:30px;
 }
 *{
-    background-color:#f3e2ed;
+    background-color:var(--primary);
 }
 #login-button {
     margin-top:20px;
@@ -44,9 +44,9 @@ h3 {
     justify-content: center;
     width: 20vw;
     border-style: solid;
-    border-color: #332936;
-    background-color: #332936;
-    color:#F3DEE6;
+    border-color: var(--button);
+    background-color: var(--button);
+    color: var(--primary);
     text-align: center;
     height: 7vh;
     line-height: 6.5vh;
@@ -94,10 +94,10 @@ h3 {
 }
 #login-button:hover {
     transform: translateY(-2px);
-    background-color:#F3DEE6;
-    color: #332936;
+    background-color: var(--primary);
+    color: var(--button);
     border-style: solid;
-    border-color: #332936;
+    border-color: var(--button);
     cursor: pointer;
 
 }
