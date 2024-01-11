@@ -18,7 +18,6 @@ const Dashboard = () => {
     const [pressed, setPressed] = useState("swiftify me !!");
     return (
         <div id="container2">
-        <Modes />
         {profile.display_name ? (
             <h1 id="username" >
             hey {profile.display_name}!
