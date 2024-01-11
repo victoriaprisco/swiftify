@@ -6,7 +6,6 @@ import Modes from './Modes.js'
 
 const Login = () => {
     return (<>
-        <Modes />
         <div id="container">
             <h1 id="welcome">welcome to swiftify!</h1>
             <span id="subheader"><h3 className="desc">replace all the stolen songs with taylor's versions on your playlists</h3></span>
