@@ -1,6 +1,6 @@
 import Login from './Login';
 import Dashboard from './Dashboard';
-import Spotify from './Spotify';
+import Modes from './Modes';
 
 const Home = (props) => {
     return(
@@ -9,7 +9,10 @@ const Home = (props) => {
 
         
         {props.reload === true || window.location.href === 'https://victoriaprisco.github.io/swiftify/' ?
-            <Login /> :
+            <>
+            <Modes />
+            <Login /> 
+            </>:
             <Dashboard />
         }   
         </>
