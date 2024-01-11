@@ -18,3 +18,13 @@ label {
     margin: 20px;
     color: var(--highlight);
 }
+
+@media (max-width: 700px) {
+    form {
+        margin: 1px;
+    }
+    label {
+        margin: 20px 0;
+        font-size: 3vw;
+    }
+}
